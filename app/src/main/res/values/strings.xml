@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">两步验证</string>
+    <string name="home_title">我的账户</string>
+    <string name="add_account">添加账户</string>
+    <string name="manual_input">手动输入</string>
+    <string name="scan_qr">扫描二维码</string>
+    <string name="issuer_hint">发行方 (如 GitHub)</string>
+    <string name="account_name_hint">账户名 (如 user@email.com)</string>
+    <string name="secret_hint">密钥 (Base32)</string>
+    <string name="algorithm_label">算法</string>
+    <string name="digits_label">位数</string>
+    <string name="period_label">周期 (秒)</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="copied">验证码已复制</string>
+    <string name="no_accounts">暂无账户\n点击右下角 + 添加</string>
+    <string name="settings">设置</string>
+    <string name="lock_screen_title">需要验证身份</string>
+    <string name="biometric_prompt_title">解锁两步验证</string>
+    <string name="biometric_prompt_subtitle">使用指纹或面部识别解锁</string>
+    <string name="search_hint">搜索账户...</string>
+    <string name="confirm_delete">确认删除</string>
+    <string name="delete_account_message">确定要删除此账户吗？此操作不可撤销。</string>
+    <string name="delete">删除</string>
+</resources>
