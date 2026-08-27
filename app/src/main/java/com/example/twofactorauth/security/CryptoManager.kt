@@ -30,12 +30,20 @@ class CryptoManager @Inject constructor() {
 
     init {
         try {
-            if (!keyStore.containsAlias(KEY_ALIAS)) {
+            if (keyStore.containsAlias(KEY_ALIAS)) {
+                // Verify existing key is usable; if not, regenerate.
+                try {
+                    val cipher = Cipher.getInstance(TRANSFORMATION)
+                    cipher.init(Cipher.ENCRYPT_MODE, getSecretKey())
+                } catch (e: Exception) {
+                    Log.w("CryptoManager", "Existing key unusable, regenerating", e)
+                    keyStore.deleteEntry(KEY_ALIAS)
+                    generateKey()
+                }
+            } else {
                 generateKey()
             }
         } catch (e: Exception) {
-            // Surface the error so it's not silently swallowed — encryption/decryption
-            // will fail later with a clearer message if the key was never created.
             Log.e("CryptoManager", "Failed to initialise AndroidKeyStore key", e)
         }
     }
@@ -52,7 +60,6 @@ class CryptoManager @Inject constructor() {
             .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
             .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
             .setKeySize(256)
-            .setUnlockedDeviceRequired(true)  // key only usable when device is unlocked
             .build()
         keyGenerator.init(spec)
         keyGenerator.generateKey()
